@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">AndroidDemo</string>
+    <string name="search_repo">Search Repo</string>
+    <string name="query">Query</string>
+    <string name="search_result">Search Result</string>
+    <string name="image">image</string>
+</resources>
