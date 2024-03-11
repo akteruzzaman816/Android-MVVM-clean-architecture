@@ -4,15 +4,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.amit.androiddemo.network.DataState
+import com.amit.androiddemo.data.remote.network.DataState
 import com.amit.androiddemo.repo.AppRepository
 import com.amit.androiddemo.utilities.AppConstants
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import okhttp3.ResponseBody
 import retrofit2.Response
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class AppVM : ViewModel() {
-    private val repository = AppRepository()
+@HiltViewModel
+class AppVM @Inject constructor(private val repository: AppRepository) : ViewModel() {
 
     // search repo data
     private val _repoListResponse: MutableLiveData<DataState<Response<ResponseBody>>> =

@@ -5,23 +5,24 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.lifecycle.ViewModelProvider
+import androidx.activity.viewModels
 import com.amit.androiddemo.databinding.ActivityResultViewBinding
-import com.amit.androiddemo.model.ModelRepoListResponse
-import com.amit.androiddemo.network.DataState
+import com.amit.androiddemo.data.remote.network.model.ModelRepoListResponse
+import com.amit.androiddemo.data.remote.network.DataState
 import com.amit.androiddemo.utilities.AppConstants
 import com.amit.androiddemo.viewModel.AppVM
 import com.google.gson.Gson
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ResultViewActivity : AppCompatActivity() {
     private val TAG = "#X_"
     private lateinit var binding: ActivityResultViewBinding
-    private lateinit var viewModel:AppVM
+    private val viewModel:AppVM  by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityResultViewBinding.inflate(layoutInflater)
-        viewModel = ViewModelProvider(this)[AppVM::class.java]
         setContentView(binding.root)
 
         // observe api response

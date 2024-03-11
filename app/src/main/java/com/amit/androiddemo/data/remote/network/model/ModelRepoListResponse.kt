@@ -1,4 +1,4 @@
-package com.amit.androiddemo.model
+package com.amit.androiddemo.data.remote.network.model
 import androidx.annotation.Keep
 
 import com.google.gson.annotations.SerializedName

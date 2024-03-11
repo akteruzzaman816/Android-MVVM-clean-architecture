@@ -1,10 +1,12 @@
 package com.amit.androiddemo.repo
 
-import com.amit.androiddemo.network.BaseRepository
-import com.amit.androiddemo.network.HttpClient
+import com.amit.androiddemo.data.remote.network.ApiService
+import com.amit.androiddemo.data.remote.network.BaseRepository
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class AppRepository : BaseRepository() {
-    private val  api = HttpClient.getInstance()
+@Singleton
+class AppRepository @Inject constructor(private val api: ApiService) : BaseRepository() {
 
     suspend fun getGithubRepo(
         query: String

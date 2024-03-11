@@ -7,7 +7,9 @@ import androidx.core.os.bundleOf
 import com.amit.androiddemo.R
 import com.amit.androiddemo.databinding.ActivityHomeBinding
 import com.amit.androiddemo.utilities.AppConstants
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
     override fun onCreate(savedInstanceState: Bundle?) {

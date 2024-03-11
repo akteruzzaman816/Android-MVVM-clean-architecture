@@ -1,4 +1,4 @@
-package com.amit.androiddemo.network
+package com.amit.androiddemo.data.remote.network
 
 import okhttp3.ResponseBody
 
