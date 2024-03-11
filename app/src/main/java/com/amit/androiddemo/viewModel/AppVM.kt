@@ -4,8 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.amit.androiddemo.data.local.model.SearchResponse
 import com.amit.androiddemo.data.remote.network.DataState
-import com.amit.androiddemo.repo.AppRepository
+import com.amit.androiddemo.data.repo.AppRepository
 import com.amit.androiddemo.utilities.AppConstants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -18,8 +19,7 @@ import javax.inject.Singleton
 class AppVM @Inject constructor(private val repository: AppRepository) : ViewModel() {
 
     // search repo data
-    private val _repoListResponse: MutableLiveData<DataState<Response<ResponseBody>>> =
-        MutableLiveData()
+    private val _repoListResponse: MutableLiveData<DataState<Response<ResponseBody>>> = MutableLiveData()
     val repoListResponse: LiveData<DataState<Response<ResponseBody>>> get() = _repoListResponse
 
     fun getGithubRepo(
@@ -29,23 +29,22 @@ class AppVM @Inject constructor(private val repository: AppRepository) : ViewMod
         _repoListResponse.value = repository.getGithubRepo(query)
     }
 
-    // check api response
-    fun isValidResponse(responseBody: DataState.Success<Response<ResponseBody>?>): Boolean {
-        return responseBody.value?.headers()?.get(AppConstants.CONTENT_TYPE_KEY)?.contains(
-            AppConstants.JSON_VALID_KEY, true
-        )?: false
+
+   // insert search response to local db
+    fun insertSearchResult(
+        query: SearchResponse
+    ) = viewModelScope.launch {
+        repository.insertSearchResult(query)
     }
 
-    // setup json response for webView
-    fun getHtmlData(json: String): String {
-        return "<html><head><script type='text/javascript'>function displayJson() {" +
-                "var json = " + json + ";" +
-                "document.getElementById('json').innerText = JSON.stringify(json, null, 4);" +
-                "}" +
-                "</script></head>" +
-                "<body onload='displayJson()'>" +
-                "<pre id='json'></pre>" +
-                "</body></html>"
+    // check search keyword
+    private val _checkData: MutableLiveData<DataState<SearchResponse>> = MutableLiveData()
+    val checkData: LiveData<DataState<SearchResponse>> get() = _checkData
+    fun checkSearchKeyword(
+        keyword: String
+    ) = viewModelScope.launch {
+        _checkData.value = repository.checkSearchKeyword(keyword)
     }
+
 
 }

@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.activity.viewModels
 import com.amit.androiddemo.databinding.ActivityResultViewBinding
-import com.amit.androiddemo.data.remote.network.model.ModelRepoListResponse
+import com.amit.androiddemo.data.remote.model.ModelRepoListResponse
 import com.amit.androiddemo.data.remote.network.DataState
 import com.amit.androiddemo.utilities.AppConstants
 import com.amit.androiddemo.viewModel.AppVM
@@ -52,7 +52,7 @@ class ResultViewActivity : AppCompatActivity() {
                     binding.progressBar.isVisible = false
                     val body = it.value.body()?.string()
                     if (!body.isNullOrBlank()) {
-                        if (viewModel.isValidResponse(it)) {
+                        if (AppConstants.isValidResponse(it)) {
                             val response = Gson().fromJson(body, ModelRepoListResponse::class.java)
                             setData(response)
                         } else Log.d(TAG, "observeAppointmentResponse: $body")
@@ -79,7 +79,7 @@ class ResultViewActivity : AppCompatActivity() {
         webView.apply {
             settings.javaScriptEnabled = true
             setInitialScale(100)
-            webView.loadDataWithBaseURL(null, viewModel.getHtmlData(Gson().toJson(response)), "text/html", "utf-8", null)
+            webView.loadDataWithBaseURL(null, AppConstants.getHtmlData(Gson().toJson(response)), "text/html", "utf-8", null)
         }
     }
 

@@ -6,7 +6,7 @@ import retrofit2.HttpException
 
 abstract class BaseRepository {
 
-    suspend fun <T> safeApiCall(apiCall: suspend () -> T): DataState<T> {
+    suspend fun <T> safeFetchData(apiCall: suspend () -> T): DataState<T> {
         return withContext(Dispatchers.IO) {
             try {
                 DataState.Success(apiCall.invoke())
