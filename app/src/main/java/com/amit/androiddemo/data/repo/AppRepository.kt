@@ -29,6 +29,15 @@ class AppRepository @Inject constructor(private val api: ApiService,private val 
     // insert search response
     suspend fun insertSearchResult(
         data: SearchResponse
-    ) = appDao.insert(data)
+    ) = safeFetchData {
+        appDao.insert(data)
+    }
+
+    // delete cache response
+    suspend fun deleteCacheData(
+        id:Long
+    ) = safeFetchData {
+        appDao.deleteCacheData(id)
+    }
 
 }

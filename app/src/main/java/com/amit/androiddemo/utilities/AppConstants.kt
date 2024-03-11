@@ -34,5 +34,22 @@ object AppConstants {
                 "</body></html>"
     }
 
+    fun addTenMinutesToCurrentTime(): Long {
+        val currentTimeMillis = System.currentTimeMillis()
+        val tenMinutesInMillis = 2 * 60 * 1000 // 10 minutes in milliseconds
+        return currentTimeMillis + tenMinutesInMillis
+    }
+
+    fun validateCacheLifeTime(timestamp: Long): Boolean {
+        val currentTimestamp = System.currentTimeMillis()
+        return if (timestamp < currentTimestamp) {
+            false
+        } else if (timestamp > currentTimestamp) {
+            true
+        } else {
+            true
+        }
+    }
+
 
 }

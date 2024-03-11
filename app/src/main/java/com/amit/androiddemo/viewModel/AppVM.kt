@@ -37,6 +37,13 @@ class AppVM @Inject constructor(private val repository: AppRepository) : ViewMod
         repository.insertSearchResult(query)
     }
 
+   // delete cache from db
+    fun deleteCacheData(
+       id:Long
+    ) = viewModelScope.launch {
+        repository.deleteCacheData(id)
+    }
+
     // check search keyword
     private val _checkData: MutableLiveData<DataState<SearchResponse>> = MutableLiveData()
     val checkData: LiveData<DataState<SearchResponse>> get() = _checkData

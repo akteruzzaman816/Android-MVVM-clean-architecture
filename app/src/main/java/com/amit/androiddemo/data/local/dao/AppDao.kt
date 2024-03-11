@@ -14,4 +14,7 @@ interface AppDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(news: SearchResponse)
 
+    @Query("DELETE FROM search_response where id =:id")
+    suspend fun deleteCacheData(id:Long)
+
 }

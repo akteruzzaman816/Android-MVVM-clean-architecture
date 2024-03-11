@@ -9,16 +9,19 @@ import java.io.Serializable
 data class SearchResponse(
     @PrimaryKey(autoGenerate = true)
     @SerializedName("id")
-    var id: Long,
+    var id: Long = 0,
 
     @SerializedName("search_query")
-    private var searchQuery: String?,
+    var searchQuery: String?,
 
     @SerializedName("response_data")
-    private var responseData: String?,
+    var responseData: String?,
 
-    @SerializedName("timestamp")
-    private var timeStamp: Long?
+    @SerializedName("created_at")
+    var createdAt: Long?,
+
+    @SerializedName("valid_till")
+    var validTill: Long?
 
 ) : Serializable
 
