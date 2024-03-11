@@ -5,11 +5,12 @@ import okhttp3.ResponseBody
 import retrofit2.Response
 
 object AppConstants {
-
     // end points
     const val GITHUB_REPO              = "search/repositories"
 
+    // constants
     const val SEARCH_KEYWORD = "search_keyword"
+    const val  TAG = "#X_"
 
     // JSON STATUS
     private const val JSON_VALID_KEY = "application/json"
@@ -17,8 +18,8 @@ object AppConstants {
 
     // check api response
     fun isValidResponse(responseBody: DataState.Success<Response<ResponseBody>?>): Boolean {
-        return responseBody.value?.headers()?.get(AppConstants.CONTENT_TYPE_KEY)?.contains(
-            AppConstants.JSON_VALID_KEY, true
+        return responseBody.value?.headers()?.get(CONTENT_TYPE_KEY)?.contains(
+            JSON_VALID_KEY, true
         )?: false
     }
 
@@ -40,7 +41,7 @@ object AppConstants {
         return currentTimeMillis + tenMinutesInMillis
     }
 
-    fun validateCacheLifeTime(timestamp: Long): Boolean {
+    fun validateApiCacheLifeTime(timestamp: Long): Boolean {
         val currentTimestamp = System.currentTimeMillis()
         return if (timestamp < currentTimestamp) {
             false
@@ -50,6 +51,5 @@ object AppConstants {
             true
         }
     }
-
 
 }

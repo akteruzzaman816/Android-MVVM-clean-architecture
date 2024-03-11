@@ -19,6 +19,7 @@ class AppModule {
     @Singleton
     @Provides
     fun provideApiService(): ApiService = HttpClient.getInstance()
+
     @Singleton
     @Provides
     fun provideRepository(apiService: ApiService,appDao: AppDao): AppRepository = AppRepository(apiService,appDao)
@@ -27,6 +28,7 @@ class AppModule {
     @Provides
     fun provideLocalDb(app: Application) = AppDatabase.getInstance(app)
 
+    @Singleton
     @Provides
     fun providesAppDao(appDatabase: AppDatabase):AppDao =
         appDatabase.getAppDao()

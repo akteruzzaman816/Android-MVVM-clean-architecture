@@ -5,15 +5,15 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import androidx.sqlite.db.SupportSQLiteDatabase
 import com.amit.androiddemo.data.local.dao.AppDao
+import com.amit.androiddemo.data.local.model.ScreenshotData
 import com.amit.androiddemo.data.local.model.SearchResponse
 
 /**
- * The Room database for this app
+ * Room database for local caching
  */
 @Database(
-    entities = [SearchResponse::class], version = 1, exportSchema = false
+    entities = [SearchResponse::class, ScreenshotData::class], version = 1, exportSchema = false
 )
 @TypeConverters()
 abstract class AppDatabase : RoomDatabase() {
@@ -33,11 +33,7 @@ abstract class AppDatabase : RoomDatabase() {
         // Create and pre-populate the database
         private fun buildDatabase(context: Context): AppDatabase {
             return Room.databaseBuilder(context, AppDatabase::class.java, "app-db")
-                .addCallback(object : Callback() {
-                    override fun onCreate(db: SupportSQLiteDatabase) {
-                        super.onCreate(db)
-                    }
-                }).build()
+                .addCallback(object : Callback() {}).build()
         }
     }
 }
