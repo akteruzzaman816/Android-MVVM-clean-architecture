@@ -16,14 +16,22 @@ object AppConstants {
     private const val JSON_VALID_KEY = "application/json"
     private const val CONTENT_TYPE_KEY = "content-type"
 
-    // check api response
+    /**
+     * this function checks api response whether it is valid or not
+     * @param[responseBody] response body
+     * @return boolean
+     */
     fun isValidResponse(responseBody: DataState.Success<Response<ResponseBody>?>): Boolean {
         return responseBody.value?.headers()?.get(CONTENT_TYPE_KEY)?.contains(
             JSON_VALID_KEY, true
         )?: false
     }
 
-    // setup json response for webView
+    /**
+     * generate boilerplate html for webView json preview
+     * @param[json] json String
+     * @return html code in String format
+     */
     fun getHtmlData(json: String): String {
         return "<html><head><script type='text/javascript'>function displayJson() {" +
                 "var json = " + json + ";" +
@@ -35,12 +43,22 @@ object AppConstants {
                 "</body></html>"
     }
 
+
+    /**
+     * this function adds 10 minutes with current time
+     * @return converted time  in Long
+     */
     fun addTenMinutesToCurrentTime(): Long {
         val currentTimeMillis = System.currentTimeMillis()
         val tenMinutesInMillis = 2 * 60 * 1000 // 10 minutes in milliseconds
         return currentTimeMillis + tenMinutesInMillis
     }
 
+    /**
+     * this function checks api cache lifetime
+     * @param[timestamp] timestamp  Long
+     * @return converted time  in Long
+     */
     fun validateApiCacheLifeTime(timestamp: Long): Boolean {
         val currentTimestamp = System.currentTimeMillis()
         return if (timestamp < currentTimestamp) {
