@@ -62,17 +62,17 @@ Build and run the project in Android Studio:
 
 ## Features
 
-### Search GitHub Repository
+#### Search GitHub Repository
 - Users can search for GitHub repositories using keywords.
 
-### Display JSON Data in WebView
+#### Display JSON Data in WebView
 - JSON data retrieved from the GitHub API is displayed in a WebView.
 
-### Caching Mechanism
+#### Caching Mechanism
 - If the same keyword is searched within 10 minutes, the app retrieves data from the Room database instead of making an API call.
 
-### Automatic Screenshot Generation
+#### Automatic Screenshot Generation
 - Upon retrieving data from the WebView, the app automatically takes a screenshot and stores it in the device cache directory.
 
-### Cache Data Management
+#### Cache Data Management
 - Cache data older than 30 minutes is automatically deleted to maintain efficiency and manage storage space.
