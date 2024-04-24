@@ -2,7 +2,7 @@
 <img src="https://www.freepnglogos.com/uploads/android-logo-png/android-logo-android-icon-logo-vector-eps-download-24.png"  width ="100" height="100" >
 </p>
 <div align="center">
- <h2> Android Demo </h2>
+ <h2> Android-MVVM-clean-architecture </h2>
 </div>
 
 
